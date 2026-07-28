@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#16a34a">
+  <link rel="manifest" href="manifest.json">
+  <title>Preço Certo</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app">
+    <!-- Sidebar -->
+    <aside id="sidebar" class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <span class="logo-icon">$</span>
+          <div class="logo-text">
+            <h1>Preço Certo</h1>
+            <span>Precificação inteligente</span>
+          </div>
+        </div>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="#" class="nav-item active" data-page="dashboard">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="#" class="nav-item" data-page="materiais">
+          <span class="nav-icon">📦</span>
+          <span>Materiais</span>
+        </a>
+        <a href="#" class="nav-item" data-page="receitas">
+          <span class="nav-icon">📋</span>
+          <span>Receitas</span>
+        </a>
+        <a href="#" class="nav-item" data-page="produtos">
+          <span class="nav-icon">🏷️</span>
+          <span>Produtos</span>
+        </a>
+        <a href="#" class="nav-item" data-page="embalagens">
+          <span class="nav-icon">📦</span>
+          <span>Embalagens</span>
+        </a>
+        <a href="#" class="nav-item" data-page="despesas-fixas">
+          <span class="nav-icon">💰</span>
+          <span>Despesas Fixas</span>
+        </a>
+        <a href="#" class="nav-item" data-page="despesas-variaveis">
+          <span class="nav-icon">📉</span>
+          <span>Despesas Variáveis</span>
+        </a>
+        <a href="#" class="nav-item" data-page="calculadora">
+          <span class="nav-icon">🧮</span>
+          <span>Calculadora</span>
+        </a>
+        <a href="#" class="nav-item" data-page="historico">
+          <span class="nav-icon">⏱️</span>
+          <span>Histórico</span>
+        </a>
+        <a href="#" class="nav-item" data-page="metas">
+          <span class="nav-icon">🎯</span>
+          <span>Metas</span>
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="user-avatar">E</div>
+          <div class="user-details">
+            <span class="user-name">Evellin</span>
+            <span class="user-email">sua conta</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Overlay for mobile -->
+    <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+    <!-- Main Content -->
+    <main id="main-content" class="main-content">
+      <!-- Top bar -->
+      <header class="top-bar">
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+        <h2 id="page-title">Dashboard</h2>
+        <div class="top-bar-actions">
+          <button id="export-btn" class="btn btn-sm btn-outline" title="Exportar dados">📥</button>
+        </div>
+      </header>
+
+      <!-- ===== DASHBOARD ===== -->
+      <section id="page-dashboard" class="page active">
+        <div class="dashboard-header">
+          <h2>Olá, Evellin! 👋</h2>
+          <p>Aqui está o resumo do seu negócio</p>
+        </div>
+        <div class="cards-grid" id="dashboard-cards">
+          <div class="card card-clickable" onclick="navigateTo('materiais')">
+            <div class="card-icon">📦</div>
+            <div class="card-info">
+              <span class="card-label">Materiais</span>
+              <span class="card-value" id="dash-materiais">0</span>
+            </div>
+          </div>
+          <div class="card card-clickable" onclick="navigateTo('receitas')">
+            <div class="card-icon">📋</div>
+            <div class="card-info">
+              <span class="card-label">Receitas</span>
+              <span class="card-value" id="dash-receitas">0</span>
+            </div>
+          </div>
+          <div class="card card-clickable" onclick="navigateTo('produtos')">
+            <div class="card-icon">🏷️</div>
+            <div class="card-info">
+              <span class="card-label">Produtos</span>
+              <span class="card-value" id="dash-produtos">0</span>
+            </div>
+          </div>
+          <div class="card card-clickable" onclick="navigateTo('calculadora')">
+            <div class="card-icon">🧮</div>
+            <div class="card-info">
+              <span class="card-label">Cálculos</span>
+              <span class="card-value" id="dash-calculos">0</span>
+            </div>
+          </div>
+          <div class="card card-clickable" onclick="navigateTo('despesas-fixas')">
+            <div class="card-icon">💰</div>
+            <div class="card-info">
+              <span class="card-label">Custos Totais (mês)</span>
+              <span class="card-value" id="dash-custos">R$ 0,00</span>
+            </div>
+          </div>
+          <div class="card card-clickable" onclick="navigateTo('historico')">
+            <div class="card-icon">📈</div>
+            <div class="card-info">
+              <span class="card-label">Faturamento</span>
+              <span class="card-value" id="dash-faturamento">R$ 0,00</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== MATERIAIS ===== -->
+      <section id="page-materiais" class="page">
+        <div class="page-header">
+          <h2>Materiais</h2>
+          <button class="btn btn-primary" onclick="openModal('material')">+ Novo Material</button>
+        </div>
+        <div class="search-bar">
+          <input type="text" id="search-material" placeholder="Buscar material..." oninput="renderMateriais()">
+        </div>
+        <div id="materiais-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== RECEITAS ===== -->
+      <section id="page-receitas" class="page">
+        <div class="page-header">
+          <h2>Receitas</h2>
+          <button class="btn btn-primary" onclick="openModal('receita')">+ Nova Receita</button>
+        </div>
+        <div id="receitas-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== PRODUTOS ===== -->
+      <section id="page-produtos" class="page">
+        <div class="page-header">
+          <h2>Produtos</h2>
+          <button class="btn btn-primary" onclick="openModal('produto')">+ Novo Produto</button>
+        </div>
+        <div id="produtos-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== EMBALAGENS ===== -->
+      <section id="page-embalagens" class="page">
+        <div class="page-header">
+          <h2>Embalagens</h2>
+          <button class="btn btn-primary" onclick="openModal('embalagem')">+ Nova Embalagem</button>
+        </div>
+        <div id="embalagens-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== DESPESAS FIXAS ===== -->
+      <section id="page-despesas-fixas" class="page">
+        <div class="page-header">
+          <h2>Despesas Fixas</h2>
+          <button class="btn btn-primary" onclick="openModal('despesa-fixa')">+ Nova Despesa</button>
+        </div>
+        <div id="despesas-fixas-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== DESPESAS VARIÁVEIS ===== -->
+      <section id="page-despesas-variaveis" class="page">
+        <div class="page-header">
+          <h2>Despesas Variáveis</h2>
+          <button class="btn btn-primary" onclick="openModal('despesa-variavel')">+ Nova Despesa</button>
+        </div>
+        <div id="despesas-variaveis-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== CALCULADORA ===== -->
+      <section id="page-calculadora" class="page">
+        <div class="page-header">
+          <h2>Calculadora de Preço</h2>
+          <p>Calcule o preço ideal para seus produtos</p>
+        </div>
+        <div class="calculator-container">
+          <div class="form-group">
+            <label>Selecione o Produto</label>
+            <select id="calc-produto" onchange="atualizarCalculadora()">
+              <option value="">Escolha um produto...</option>
+            </select>
+          </div>
+          <div id="calc-resultado" class="calc-resultado hidden">
+            <div class="calc-resumo">
+              <h3 id="calc-nome-produto"></h3>
+              <div class="calc-preco-final" id="calc-preco-final"></div>
+            </div>
+            <div class="calc-detalhes">
+              <div class="calc-section">
+                <h4>📋 Receitas</h4>
+                <div id="calc-receitas"></div>
+              </div>
+              <div class="calc-section">
+                <h4>📦 Embalagens</h4>
+                <div id="calc-embalagens"></div>
+              </div>
+              <div class="calc-section">
+                <h4>💰 Custos Fixos (rateio)</h4>
+                <div id="calc-fixas"></div>
+              </div>
+              <div class="calc-section">
+                <h4>📉 Despesas Variáveis</h4>
+                <div id="calc-variaveis"></div>
+              </div>
+              <div class="calc-total">
+                <div class="total-row"><span>Custo total unitário:</span><span id="calc-custo-total"></span></div>
+                <div class="total-row"><span>Margem de lucro:</span><span id="calc-margem"></span></div>
+                <div class="total-row total-final"><span>Preço de venda sugerido:</span><span id="calc-preco-sugerido"></span></div>
+              </div>
+            </div>
+            <div class="calc-actions">
+              <button class="btn btn-primary" onclick="salvarCalculo()">✅ Salvar no Histórico</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== HISTÓRICO ===== -->
+      <section id="page-historico" class="page">
+        <div class="page-header">
+          <h2>Histórico</h2>
+        </div>
+        <div id="historico-list" class="items-list"></div>
+      </section>
+
+      <!-- ===== METAS ===== -->
+      <section id="page-metas" class="page">
+        <div class="page-header">
+          <h2>Metas</h2>
+          <button class="btn btn-primary" onclick="openModal('meta')">+ Nova Meta</button>
+        </div>
+        <div id="metas-list" class="items-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ===== MODAIS ===== -->
+  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-title">Título</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeModal()">Cancelar</button>
+        <button class="btn btn-primary" id="modal-save" onclick="salvarModal()">Salvar</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
